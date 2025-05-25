@@ -1,0 +1,144 @@
+s: @@system
+u: стих про ковырятся в носу 
+a: Отличная идея! Давайте создадим озорной стих про такую знакомую всем детям привычку.
+
+## 1. Идея для сюжета
+Ребенок ковыряется в носу, несмотря на запреты взрослых, и находит там что-то "интересное" или происходит смешная ситуация.
+
+## 2. Первая версия
+```
+В носу копаюсь я с утра,
+Там клад, наверно, есть вчера!
+Мама кричит: "Не лезь туда!"
+А я нашел... какая ерунда!
+```
+
+## 3. Проверка рифмы
+- утра - вчера (не очень хорошо)
+- туда - ерунда (хорошо)
+
+Переделаем первые две строчки:
+
+```
+В носу копаюсь целый день,
+Искать там клады мне не лень!
+Мама кричит: "Не лезь туда!"
+А я нашел... какая ерунда!
+```
+
+Проверим снова:
+- день - лень (отлично!)
+- туда - ерунда (отлично!)
+
+## 4. Добавляем стих в data.md
+tc: append {"filename":"/Users/iovdin/projects/danylo/stihi/data.md"}
+
+## В носу
+В носу копаюсь целый день,  
+Искать там клады мне не лень!  
+Мама кричит: "Не лезь туда!"  
+А я нашел... какая ерунда!
+tr: done
+a: ## 5. Создаем иллюстрацию
+tc: openai_imgen {"filename":"/Users/iovdin/projects/danylo/stihi/pictures/nose.png","quality":"low","size":"landscape"}
+A simple black and white stickman drawing. Childlike, rough lines, minimalist details. A child with finger in nose, looking mischievous. Mother figure in background with hands on hips looking disapproving. Simple stick figures.
+tr: image generated
+a: ## 6. Добавляем стих в книгу book.tex
+
+Сначала посмотрим структуру файла:
+tc: rf {"filename":"/Users/iovdin/projects/danylo/stihi/book.tex"}
+tr: @book.tex
+a: Теперь добавим новый стих перед закрывающим тегом документа:
+tc: patch {"filename":"/Users/iovdin/projects/danylo/stihi/book.tex"}
+<<<<<<< ORIGINAL
+\end{center}
+\vspace*{\fill}
+
+\end{document}
+=======
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+  {\huge\textbf{В носу}}
+
+  \vspace{1.5em}
+  \includegraphics[width=0.7\textwidth]{pictures/nose.png}
+  \vspace{4em}
+  \parbox{0.6\textwidth}{
+    \LARGE
+    \begin{spacing}{1.2}
+      В носу копаюсь целый день,\\
+      Искать там клады мне не лень!\\
+      Мама кричит: "Не лезь туда!"\\
+      А я нашел... какая ерунда! %
+    \end{spacing}
+      
+  }
+\end{center}
+\vspace*{\fill}
+
+\end{document}
+>>>>>>> UPDATED
+tr: patched
+a: ## 7. Компилируем книгу
+tc: sh
+cd /Users/iovdin/projects/danylo/stihi && xelatex book.tex
+tr: This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./book.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-xetex.def)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/setspace/setspace.sty)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty))) (./book.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+
+[1]
+[2]
+[3]
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 110--110
+\TU/Arial(0)/m/n/17.28 Почему в тарелке спряталась
+
+Underfull \hbox (badness 4084) in paragraph at lines 110--110
+\TU/Arial(0)/m/n/17.28 Почему нельзя мне прыгать на
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--110
+\TU/Arial(0)/m/n/17.28 Почему конфеты прячутся в
+
+[5]
+[6]
+[7]
+[8]
+[9]
+[10]
+[11]
+[12]
+[13]
+[14] (./book.aux) )
+(see the transcript file for additional information)
+Output written on book.pdf (14 pages).
+Transcript written on book.log.
+

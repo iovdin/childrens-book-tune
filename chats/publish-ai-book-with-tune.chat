@@ -1,0 +1,437 @@
+system:
+@claude-sonnet-4-20250514
+@rf @wf @patch @append @sh
+
+Your goal is to help to publish new  repository to github
+
+user:
+Im making a book for my son using tune https://github.com/iovdin/tune
+which is a way to chat with llm in .chat text file
+what is the structure of the project
+chats/ - this is where all chats are kept
+pictures/ - pictures generated are stored
+book.md - file with markdown version of the book
+book.tex - this is a main file of the boog
+chapters/ - separate chapters .tex files are kept
+system.prompt - the main prompt to create a new chapter/poem for the book
+
+to create new poem 
+create a chat file
+```chat
+system:
+\@\@system
+user:
+make a poem about "<topic>" 
+```
+and then chat through the flow with shift+enter
+
+research current repo, figure stuff out and then
+create a README.md file
+
+The readme file should show how to use tune to make some ai workflow
+
+
+assistant:
+I'll help you explore the current repository structure and create a README.md file for your book project. Let me start by examining what's currently in the repository.
+tool_call: sh
+find . -type f -name "*" | head -20
+tool_result:
+./book.pdf
+./book.md
+./system.prompt
+./.DS_Store
+./append.schema.json
+./chapters/04_squidgame.tex
+./chapters/06_sock.tex
+./chapters/01_sleep.tex
+./chapters/03_antonyms.tex
+./chapters/08_no.tex
+./chapters/14_privet.tex
+./chapters/11_nedam.tex
+./chapters/15_nose.tex
+./chapters/17_pee.tex
+./chapters/07_tooth.tex
+./chapters/16_boredom.tex
+./chapters/13_nemozhet.tex
+./chapters/05_why.tex
+./chapters/12_kind_evil.tex
+./chapters/18_fail.tex
+
+assistant:
+
+tool_call: sh
+ls -la
+tool_result:
+total 67416
+drwxr-xr-x  15 iovdin  staff       480 May 25 08:51 .
+drwxr-xr-x  89 iovdin  staff      2848 May 18 08:26 ..
+-rw-r--r--\@  1 iovdin  staff      6148 May 25 08:51 .DS_Store
+-rw-r--r--   1 iovdin  staff       378 May 11 10:05 append.schema.json
+-rw-r--r--   1 iovdin  staff       177 May 11 10:08 append.tool.mjs
+-rw-r--r--   1 iovdin  staff        33 May 25 08:59 book.aux
+-rw-r--r--   1 iovdin  staff     14263 May 25 09:00 book.log
+-rw-r--r--\@  1 iovdin  staff      5656 May 25 08:56 book.md
+-rw-r--r--\@  1 iovdin  staff  34378096 May 25 09:00 book.pdf
+-rw-r--r--   1 iovdin  staff      1040 May 25 08:58 book.tex
+drwxr-xr-x   4 iovdin  staff       128 May 24 21:44 build
+drwxr-xr-x  22 iovdin  staff       704 May 25 08:58 chapters
+drwxr-xr-x  27 iovdin  staff       864 May 25 08:54 chats
+drwxr-xr-x  25 iovdin  staff       800 May 25 08:58 pictures
+-rw-r--r--   1 iovdin  staff      1388 May 25 08:32 system.prompt
+
+
+assistant:
+
+tool_call: rf {"filename":"system.prompt"}
+tool_result:
+@system.prompt
+
+assistant:
+
+tool_call: rf {"filename":"book.md"}
+tool_result:
+@book.md
+
+assistant:
+
+tool_call: rf {"filename":"book.tex"}
+tool_result:
+@book.tex
+
+assistant:
+
+tool_call: rf {"filename":"chapters/01_sleep.tex"}
+tool_result:
+@chapters/01_sleep.tex
+
+assistant:
+
+tool_call: sh
+ls chats/ | head -10
+tool_result:
+barber.chat
+chocolade.chat
+healthy-food.chat
+including-files-in-latex.chat
+markup.chat
+merge-chapters-to-book.chat
+ne-poluchaetsya.chat
+nedam.chat
+nehochu.chat
+nemozhebit.chat
+
+
+assistant:
+
+tool_call: sh
+ls pictures/ | head -10
+tool_result:
+attrakcioni.png
+haircut.png
+healthy-food.png
+ne_poluchaetsya.png
+nedam.png
+nehochu.png
+nemozhebit.png
+nose.png
+obzhora.png
+opposites.jpg
+
+
+assistant:
+
+tool_call: rf {"filename":"chats/nedam.chat"}
+tool_result:
+@chats/nedam.chat
+
+assistant:
+
+tool_call: rf {"filename":"append.tool.mjs"}
+tool_result:
+@append.tool.mjs|text
+
+
+assistant:
+Now I'll create a comprehensive README.md file for this project:
+tool_call: wf {"filename":"README.md"}
+# AI Children's Book Generator with Tune
+
+This repository contains an AI-powered workflow for creating a children's book using [tune](https://github.com/iovdin/tune) - a tool that enables chatting with LLMs using .chat text files.
+
+## 📁 Project Structure
+
+```
+├── chats/          # Chat files for generating poems
+├── pictures/       # Generated illustrations (PNG)
+├── chapters/       # Individual LaTeX chapter files
+├── book.md         # Markdown version of the complete book
+├── book.tex        # Main LaTeX file for the book
+├── book.pdf        # Compiled PDF book
+├── system.prompt   # Main prompt for creating new chapters/poems
+├── append.tool.mjs # Custom tool for appending content to files
+└── append.schema.json # Schema for the append tool
+```
+
+## 🎯 What This Project Does
+
+This workflow creates a collection of simple, mischievous poems for children in Russian, complete with illustrations. Each poem:
+- Has 2 quatrains (8 lines total)
+- Uses simple words and rhymes
+- Has a playful/mischievous spirit
+- Comes with a simple black and white stickman illustration
+
+## 🚀 How to Use Tune for AI Workflows
+
+### Prerequisites
+1. Install [tune](https://github.com/iovdin/tune)
+2. Have LaTeX installed (XeLaTeX specifically) for PDF compilation
+3. Configure your AI model access (Claude/OpenAI)
+
+### Creating a New Poem
+
+1. **Create a chat file** in the `chats/` directory:
+   ```bash
+   touch chats/new_topic.chat
+   ```
+
+2. **Start the conversation** in the chat file:
+   ```chat
+   make a poem about "bedtime"
+   ```
+
+3. **Run the workflow** using tune:
+   - Open the chat file
+   - Press `Shift+Enter` to start the conversation
+   - The AI will follow the system prompt workflow automatically
+
+### The Automated Workflow
+
+The `system.prompt` defines a 9-step process that runs automatically:
+
+1. **Generate story idea** - AI creates a concept for the poem
+2. **Write first version** - Creates the initial poem
+3. **Check rhyme** - Validates and improves rhyming
+4. **Add to book.md** - Appends the poem using the `append` tool
+5. **Create illustration** - Generates a PNG image using OpenAI image generation
+6. **Read book.tex** - Checks current LaTeX structure
+7. **Create chapter** - Makes a new `.tex` file in `chapters/`
+8. **Update book.tex** - Adds the new chapter using `patch` tool
+9. **Compile book** - Runs `xelatex book.tex` to generate PDF
+
+### Custom Tools Used
+
+- **@append** - Adds content to files without overwriting
+- **@patch** - Updates files using diff-style patches
+- **@openai_imgen** - Generates illustrations
+- **@sh** - Executes shell commands (like LaTeX compilation)
+- **@rf** - Reads file contents
+- **@wf** - Writes new files
+
+## 📝 Example Poem Structure
+
+Each poem follows this format in the final book:
+
+```latex
+\vspace*{\fill}
+\begin{center}
+  {\huge\textbf{Пора спать}}
+  \vspace{1.5em}
+  \includegraphics[width=0.7\textwidth]{pictures/sleep.png}
+  \vspace{4em}
+  \parbox{0.6\textwidth}{
+    \LARGE
+    \begin{spacing}{1.2}
+      Мальчик спать совсем не хочет,\\
+      На подушке он хохочет.\\
+      Но приходит тишина,\\
+      И закрылись вдруг глаза. %
+    \end{spacing}
+  }
+\end{center}
+\vspace*{\fill}
+```
+
+## 🎨 Illustration Style
+
+All illustrations are generated with this prompt style:
+- Simple black and white stickman drawings
+- Childlike, rough lines
+- Minimalist details
+- Landscape orientation
+- Low quality (for speed)
+
+## 🔧 Configuration
+
+### System Prompt Features
+- **Language**: Russian poems for children
+- **Style**: Simple words, mischievous/playful tone
+- **Format**: 2 quatrains per poem
+- **Workflow**: Fully automated from idea to compiled PDF
+
+### File Templates
+- Chapters follow the template in `chapters/01_sleep.tex`
+- Illustrations stored as PNG files in `pictures/`
+- Markdown version maintained in `book.md`
+
+## 📚 Building the Complete Book
+
+The workflow automatically:
+1. Maintains a markdown version (`book.md`)
+2. Creates individual LaTeX chapters
+3. Updates the main `book.tex` file
+4. Compiles to PDF using XeLaTeX
+
+To manually compile:
+```bash
+xelatex book.tex
+```
+
+## 🤝 Contributing
+
+To add new poems:
+1. Create a new chat file with your topic
+2. Let the AI workflow handle the creation process
+3. The poem will be automatically added to all formats
+
+## 📄 License
+
+This is a personal project for creating a children's book. Feel free to use the workflow structure for your own AI-powered book projects!
+
+---
+
+*This book is being created for educational and entertainment purposes using AI assistance through the tune framework.*
+tool_result:
+written
+user:
+can you change 
+Creating a New Poem
+and insert chat example instead of 3 step instructions
+
+assistant:
+
+tool_call: patch {"filename":"README.md"}
+<<<<<<< ORIGINAL
+### Creating a New Poem
+
+1. **Create a chat file** in the `chats/` directory:
+   ```bash
+   touch chats/new_topic.chat
+   ```
+
+2. **Start the conversation** in the chat file:
+   ```chat
+   make a poem about "bedtime"
+   ```
+
+3. **Run the workflow** using tune:
+   - Open the chat file
+   - Press `Shift+Enter` to start the conversation
+   - The AI will follow the system prompt workflow automatically
+=======
+### Creating a New Poem
+
+Create a new `.chat` file in the `chats/` directory and start a conversation. Here's an example:
+
+**File: `chats/playground.chat`**
+```chat
+ system: \@\@system
+ user: make a poem about "playground"
+ assistant: I'll create a playful poem about the playground following your workflow:
+
+### 1. Story idea
+A mischievous child at the playground who gets into fun trouble on the swings, slides, and sandbox.
+
+### 2. First version
+Качели-карусели крутятся быстрей,
+Песочек насыпаю прямо на людей.
+Со горки еду вниз как быстрая стрела,
+Штаны порвал, но мама не ругала!
+
+### 3. Checking rhyme
+Simple rhymes: быстрей-людей, стрела-ругала ✓
+
+### 4. Adding to book.md...
+[AI continues with the full workflow automatically]
+```
+
+Then press `Shift+Enter` in tune to execute the workflow. The AI will automatically follow all 9 steps from the system prompt.
+>>>>>>> UPDATED
+
+tool_result:
+patched
+user:
+good can you now make an initial commit
+please also create .gitignore and exclude pdf and building files for xelatex from it 
+
+assistant:
+I'll create a .gitignore file first and then make the initial commit.
+tool_call: wf {"filename":".gitignore"}
+# LaTeX build files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.idx
+*.ind
+*.ilg
+*.glg
+*.glo
+*.gls
+*.ist
+*.acn
+*.acr
+*.alg
+*.glsdefs
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Generated PDF files
+*.pdf
+
+# Build directory
+build/
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+tool_result:
+written
+
+assistant:
+
+tool_call: sh
+git init
+tool_result:
+Initialized empty Git repository in /Users/iovdin/projects/danylo/stihi/.git/
+
+assistant:
+
+tool_call: sh
+git add .
+tool_result:
+
